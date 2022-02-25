@@ -1,4 +1,4 @@
-import connection from "../src/models/connection";
+import connection from "../src/msc/models/connection";
 import request from "supertest";
 import app from "../src/app";
 
@@ -30,7 +30,7 @@ afterAll(async () => {
 // Clean database before tests
 beforeAll(async () => { await recreateDatabase(); });
 
-describe("1 - Crie um endpoint para o cadastro de pessoas usuárias", () => {
+describe.only("1 - Crie um endpoint para o cadastro de pessoas usuárias", () => {
   // Close connections and server after tests
   afterAll(async () => {
     await dropDatabase();
