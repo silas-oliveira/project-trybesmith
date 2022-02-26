@@ -35,7 +35,9 @@ const validateLogin = (req: Request, res: Response, next: NextFunction) => {
 const loginUser = (async (req: Request, res: Response, _next: NextFunction) => {
   const { username, password }: ILogin = req.body;
   const login = await usersService.loginUser({ username, password });
-  if (!login) return { error: 'trágico' };
+  if (login.id === 0 || login.username === '') {
+    return res.status(401).json({ error: 'Username or password invalid' });
+  }
   const { id } = login;
   const authUser = token({ id, username });
   return res.status(200).json({ token: authUser });

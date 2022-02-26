@@ -26,20 +26,17 @@ const createUser = async ({ username, classe, level, password }: IUser):Promise<
 
 const loginUser = (async ({ username, password }: ILogin): Promise<ReturnLogin> => {
   const query = 'SELECT * FROM Trybesmith.Users WHERE username = ? AND password = ?';
-
-  // const blabla = await connection.execute<ResultSetHeader>(query, [
-  //   username, password,
-  // ]);
-  // console.log('blabla', blabla);
-  // console.log([blabla]);
-
+  console.log(username, password);
   const [result] = await connection.execute<RowDataPacket[]>(query, [
     username, password,
   ]);
-  // console.log(result[0].id, username);
-  const user = result[0].id;
-  // console.log('insertId', result);
-  // const user = { id, username };
+  console.log('tiagaoResult', result);
+  if (result.length === 0) {
+    return { id: 0, username: '' };
+  }
+  const user = await result[0].id;
+  // console.log('user', user);
+
   return { id: user, username };
 });
 

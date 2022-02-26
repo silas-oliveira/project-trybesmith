@@ -13,12 +13,13 @@ export interface Schema {
   field: string;
 }
 export interface ILogin {
-  username: string;
+  username?: string;
   password?: string;
 }
 
 export interface ReturnLogin extends ILogin {
   id: number;
+
 }
 
 export interface Login extends ILogin {
