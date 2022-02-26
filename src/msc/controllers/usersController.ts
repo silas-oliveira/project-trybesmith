@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import token from '../../Auth/createToken';
+// import decodeToken from '../../Auth/decodeToken';
 import { IUser } from '../../interfaces/usersInterface';
 import { userSchema, getStatus } from '../../validations/userValidation';
 import usersService from '../services/usersService';
@@ -21,6 +22,12 @@ const createUser = (async (req: Request, res: Response, _next: NextFunction) => 
   const created = token(id);
   return res.status(201).json({ token: created });
 });
+
+// const loginUser = (async (req: Request, res: Response, next: NextFunction) => {
+//   const { username, password }: ILogin = req.body;
+//   const login = await usersService.loginUser({ username, password });
+//   decodeToken(login)
+// });
 
 export default {
   createUser,
