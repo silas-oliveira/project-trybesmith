@@ -24,7 +24,7 @@ export const userSchema = Joi.object({
   }),
 });
 
-export function getStatus(error: string) {
+export function getStatusUser(error: string) {
   console.log('getstatus', error);
   let defaultState = 422;
   switch (error) {

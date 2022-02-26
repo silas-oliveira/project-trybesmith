@@ -1,4 +1,4 @@
-import { ResultSetHeader } from 'mysql2';
+import { ResultSetHeader, RowDataPacket } from 'mysql2';
 import dotenv from 'dotenv';
 import { ILogin, IUser, ReturnLogin, User } from '../../interfaces/usersInterface';
 import connection from './connection';
@@ -25,15 +25,22 @@ const createUser = async ({ username, classe, level, password }: IUser):Promise<
 };
 
 const loginUser = (async ({ username, password }: ILogin): Promise<ReturnLogin> => {
-  const query = 'SELECT * FROM Trybesmith.Users WHERE (username, password) VALUES (?, ?)';
+  const query = 'SELECT * FROM Trybesmith.Users WHERE username = ? AND password = ?';
 
-  const [result] = await connection.execute<ResultSetHeader>(query, [
+  // const blabla = await connection.execute<ResultSetHeader>(query, [
+  //   username, password,
+  // ]);
+  // console.log('blabla', blabla);
+  // console.log([blabla]);
+
+  const [result] = await connection.execute<RowDataPacket[]>(query, [
     username, password,
   ]);
-
-  const { insertId: id } = result;
-  const user = { id, username };
-  return user;
+  // console.log(result[0].id, username);
+  const user = result[0].id;
+  // console.log('insertId', result);
+  // const user = { id, username };
+  return { id: user, username };
 });
 
 export default {

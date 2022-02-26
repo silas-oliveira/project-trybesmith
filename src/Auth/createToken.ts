@@ -5,7 +5,7 @@ dotenv.config();
 
 const secret = 'InAmLiQCSC69';
 
-const token = (infoUser: string | number) => {
+const token = (infoUser: string | number | object) => {
   console.log(infoUser);
   const tokenCreate = jwt.sign({ data: infoUser }, secret, {
     expiresIn: '7d',

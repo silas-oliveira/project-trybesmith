@@ -5,8 +5,8 @@ dotenv.config();
 
 const secret = 'InAmLiQCSC69';
  
-const decodeToken = ({ tokenInfo }: any) => {
-  const token = jwt.verify(tokenInfo, secret);
+const decodeToken = (authorization: string) => {
+  const token = jwt.verify(authorization, secret);
   if (!token) {
     console.log('error');
   }

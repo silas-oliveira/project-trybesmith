@@ -1,14 +1,14 @@
 import { Request, Response, NextFunction } from 'express';
 import token from '../../Auth/createToken';
-// import decodeToken from '../../Auth/decodeToken';
-import { IUser } from '../../interfaces/usersInterface';
-import { userSchema, getStatus } from '../../validations/userValidation';
+import { ILogin, IUser } from '../../interfaces/usersInterface';
+import { getStatusLogin, loginSchema } from '../../validations/loginValidation';
+import { userSchema, getStatusUser } from '../../validations/userValidation';
 import usersService from '../services/usersService';
 
 const validateUser = (req: Request, res: Response, next: NextFunction) => {
   const { error } = userSchema.validate(req.body);
   if (error) {
-    const status = getStatus(error.message);
+    const status = getStatusUser(error.message);
     return res.status(status).json({ error: error.message });
   }
   next();
@@ -23,13 +23,27 @@ const createUser = (async (req: Request, res: Response, _next: NextFunction) => 
   return res.status(201).json({ token: created });
 });
 
-// const loginUser = (async (req: Request, res: Response, next: NextFunction) => {
-//   const { username, password }: ILogin = req.body;
-//   const login = await usersService.loginUser({ username, password });
-//   decodeToken(login)
-// });
+const validateLogin = (req: Request, res: Response, next: NextFunction) => {
+  const { error } = loginSchema.validate(req.body);
+  if (error) {
+    const status = getStatusLogin(error.message);
+    return res.status(status).json({ error: error.message });
+  }
+  next();
+};
+
+const loginUser = (async (req: Request, res: Response, _next: NextFunction) => {
+  const { username, password }: ILogin = req.body;
+  const login = await usersService.loginUser({ username, password });
+  if (!login) return { error: 'trágico' };
+  const { id } = login;
+  const authUser = token({ id, username });
+  return res.status(200).json({ token: authUser });
+});
 
 export default {
   createUser,
   validateUser,
+  loginUser,
+  validateLogin,
 };
