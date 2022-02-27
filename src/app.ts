@@ -1,5 +1,5 @@
 import express from 'express';
-import usersController from './msc/controllers/usersController';
+import usersController from './controllers/usersController';
 
 const app = express();
 

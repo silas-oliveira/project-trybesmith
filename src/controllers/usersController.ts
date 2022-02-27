@@ -1,8 +1,8 @@
 import { Request, Response, NextFunction } from 'express';
-import token from '../../Auth/createToken';
-import { ILogin, IUser } from '../../interfaces/usersInterface';
-import { getStatusLogin, loginSchema } from '../../validations/loginValidation';
-import { userSchema, getStatusUser } from '../../validations/userValidation';
+import token from '../Auth/createToken';
+import { ILogin, IUser } from '../interfaces/usersInterface';
+import { getStatusLogin, loginSchema } from '../validations/loginValidation';
+import { userSchema, getStatusUser } from '../validations/userValidation';
 import usersService from '../services/usersService';
 
 const validateUser = (req: Request, res: Response, next: NextFunction) => {

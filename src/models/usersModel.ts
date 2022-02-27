@@ -1,6 +1,6 @@
 import { ResultSetHeader, RowDataPacket } from 'mysql2';
 import dotenv from 'dotenv';
-import { ILogin, IUser, ReturnLogin, User } from '../../interfaces/usersInterface';
+import { ILogin, IUser, ReturnLogin, User } from '../interfaces/usersInterface';
 import connection from './connection';
 
 dotenv.config();

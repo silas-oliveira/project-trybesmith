@@ -1,4 +1,4 @@
-import connection from "../src/msc/models/connection";
+import connection from '../src/models/connection';
 import request from "supertest";
 import app from "../src/app";
 
