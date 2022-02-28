@@ -17,7 +17,6 @@ const validateUser = (req: Request, res: Response, next: NextFunction) => {
 const createUser = (async (req: Request, res: Response, _next: NextFunction) => {
   const { username, classe, level, password }: IUser = req.body;
   const newUser = await usersService.createUser({ username, classe, level, password });
-  console.log({ newUser });
   const { id } = newUser;
   const created = token(id);
   return res.status(201).json({ token: created });

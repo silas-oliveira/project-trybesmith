@@ -29,3 +29,16 @@ export interface Login extends ILogin {
 export interface Authorization {
   authorization: string;
 }
+
+export interface IProducts {
+  name: string;
+  amount: string;
+}
+
+export interface Products extends IProducts {
+  id: number;
+}
+
+export interface Data {
+  data: object | undefined | string;
+}
