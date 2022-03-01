@@ -38,8 +38,14 @@ const createProduct = (async (req: Request, res: Response, _next: NextFunction) 
   return res.status(201).json({ item: { id, name, amount } });
 });
 
+const getAllProducts = (async (req: Request, res: Response, _next: NextFunction) => {
+  const products = await productsService.getAllProducts();
+  return res.status(200).json(products);
+});
+
 export default {
   createProduct,
   validateToken,
   validateProducts,
+  getAllProducts,
 };

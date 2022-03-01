@@ -5,11 +5,6 @@ dotenv.config();
 
 const secret = 'InAmLiQCSC69';
  
-// const decodeToken = (authorization: string): string | JwtPayload | undefined | Data => {
-//   const token = jwt.verify(authorization, secret);
-//   return token;
-// };
-
 const decodeToken = (tokenInfo: string): string | JwtPayload | undefined | number => {
   try {
     const token = jwt.verify(tokenInfo, secret);

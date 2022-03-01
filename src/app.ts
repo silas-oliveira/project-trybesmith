@@ -17,4 +17,6 @@ app.post(
   productsController.createProduct,
 );
 
+app.get('/products', productsController.validateToken, productsController.getAllProducts);
+
 export default app;

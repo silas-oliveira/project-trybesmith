@@ -33,6 +33,7 @@ export interface Authorization {
 export interface IProducts {
   name: string;
   amount: string;
+  orderId?: null;
 }
 
 export interface Products extends IProducts {
